@@ -9,17 +9,31 @@
     <h2>Book List</h2>
     <table>
         <tr th:each="book : ${bookList}">
+            <td th:text="${book.id}">ID</td>
             <td th:text="${book.name}">Book Name</td>
+            <td><a th:href="@{'/book/' + ${book.id}+'/delete'}">X</a></td>
         </tr>
+
     </table>
 </div>
-<h2>Create Book</h2>
-<form action="#" th:action="@{/book}" th:object="${book}" method="post">
-    <p>Book Name: <label>
-        <input type="text" th:field="*{name}" />
-    </label>
-    </p>
-    <p><input type="submit" value="Submit" /></p>
-</form>
+<div>
+    <h2>Create Book</h2>
+    <form action="#" th:action="@{/create_book}" th:object="${book}" method="post">
+        <p>Book Name: <label>
+            <input type="text" th:field="*{name}" />
+        </label>
+        </p>
+        <p><input type="submit" value="Submit" /></p>
+    </form>
+</div>
+
+<div>
+    <h2>Update Book</h2>
+    <form action="#" th:action="@{/update_book}" th:object="${book}" method="post">
+        Book ID: <input type="text" th:field="*{id}" /> <br />
+        Book Name: <input type="text" th:field="*{name}" /> <br />
+        <input type="submit" value="Submit" />
+    </form>
+</div>
 </body>
 </html>

@@ -5,9 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.stereotype.Controller
 import org.springframework.ui.Model
-import org.springframework.web.bind.annotation.ModelAttribute
-import org.springframework.web.bind.annotation.PostMapping
-import org.springframework.web.bind.annotation.RequestMapping
+import org.springframework.web.bind.annotation.*
 import javax.persistence.Column
 import javax.persistence.Entity
 import javax.persistence.GeneratedValue
@@ -42,9 +40,21 @@ class HomeController(val bookRepository: BookRepository) {
         return "home"
     }
 
-    @PostMapping("/book")
+    @PostMapping("/create_book")
     fun createBook(@ModelAttribute book: Book): String {
         bookRepository.save(book)
+        return "redirect:/"
+    }
+
+    @PostMapping("/update_book")
+    fun updateBook(@ModelAttribute book: Book): String {
+        bookRepository.save(book)
+        return "redirect:/"
+    }
+
+    @RequestMapping("/book/{id}/delete")
+    fun deleteBook(@PathVariable id:Long): String {
+        bookRepository.delete(id)
         return "redirect:/"
     }
 }
